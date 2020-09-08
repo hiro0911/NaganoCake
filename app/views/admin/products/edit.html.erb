@@ -1,0 +1,36 @@
+<h3>新規登録商品</h3>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+			<%= form_with model:@product, url: "/admin/products/#{@product.id}", method: :patch,  local: true do |f| %>
+			<%= attachment_image_tag @product, :image, size: "200x200", fallback: "no_image.jpg" %>
+			<%= f.attachment_field :image %>
+		</div>
+		<div class="col-xs-3">
+			<table class="table">
+				<tr>
+					<td><%= f.label :name, "商品名" %></td>
+					<td><%= f.text_field :name %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :description, "商品説明" %></td>
+					<td><%= f.text_area :description %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :genre_id, "ジャンル"  %></td>
+					<td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択してください--" %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :price, "税抜価格" %></td>
+					<td><%= f.text_field :price %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :seles_status, "販売ステータス" %></td>
+					<td><%= f.select :seles_status, [["販売中", true], ["販売停止", false]], include_blank: "--選択してください--" %></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<%= f.submit "変更を保存", class: "btn btn-primary" %>
+	<% end %>
+</div>
