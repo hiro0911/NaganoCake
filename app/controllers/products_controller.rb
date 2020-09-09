@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
 	def top
-		@product = Product.new
+		@products = Product.all
+		@genres = Genre.all
 	end
 	def show
 	end
