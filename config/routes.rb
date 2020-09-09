@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 	    resources :products, :except => :destroy
 	    resources :genres, :only => [:edit, :update, :create, :index]
 	    resources :customers, :only => [:edit, :update, :show, :index]
-	    resources :ordered_products, :only => :update
+	    resources :ordered_products
 	    resources :orders, :only => [:update, :show, :index]
 	end
 

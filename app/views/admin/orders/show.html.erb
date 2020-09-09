@@ -1,0 +1,68 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>注文履歴詳細</h3>
+			<table class="table">
+				<tr>
+					<th>購入者</th>
+					<td><%= @order.customer.full_name %></td>
+				</tr>
+				<tr>
+					<th>配送先</th>
+					<td><%= @order.address %></td>
+				</tr>
+				<tr>
+					<th>支払方法</th>
+					<td><%= @order.payment %></td>
+				</tr>
+				<tr>
+					<th>注文ステータス</th>
+					<%= form_with model:@order url: "/admin/orders/#{@order.id}", method: :patch, local: true do |f| %>
+					<td><%= f.select :order_status,[["入金待ち", "入金待ち"], ["入金確認", "入金確認"], ["製作中", "製作中"], ["発送準備中", "発送準備中"], ["発送済み", "発送済み"]] %></td>
+					<td><%= f.submit "更新", class: "btn btn-primary" %></td>
+					<% end %>
+				</tr>
+			</table>
+		</div>
+		<div class="col-xs-9">
+			<table class="table">
+				<tr>
+					<th>商品名</th>
+					<th>単価（税込）</th>
+					<th>数量</th>
+					<th>小計</th>
+					<th>製作ステータス</th>
+					<th></th>
+				</tr>
+				<%= @ordered_products.each do |ordered_product| %>
+				<tr>
+					<td><%= ordered_product.product.name %></td>
+					<td><%= ordered_product.product.price %></td>
+					<td><%= ordered_product.count %></td>
+					<td><%= ordered_product.price %></td>
+					<%= form_with model:ordered_product, url: "/admin/ordered_products/#{ordered_product.id}", method: :patch, local: true do |f| %>
+					<td><%= f.select :production_status,[["着手不可", "着手不可"], ["製作待ち", "製作待ち"], ["製作中", "製作中"], ["製作完了", "製作完了"]] %></td>
+					<td><%= f.submit "更新", class: "btn btn-primary" %></td>
+					<% end %>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+		<div class="col-xs-3">
+			<table class="table">
+				<tr>
+					<th>商品合計</th>
+					<td><%= @order.billing_amount %>円</td>
+				</tr>
+				<tr>
+					<th>送料</th>
+					<td>800円</td>
+				</tr>
+				<tr>
+					<th>請求合計金額</th>
+					<td><%= @order.billing_amount + 800 %>円</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

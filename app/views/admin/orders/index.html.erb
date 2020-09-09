@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>注文履歴</h3>
+			<table class="table">
+				<tr>
+					<th>購入日時</th>
+					<th>購入者</th>
+					<th>注文個数</th>
+					<th>注文ステータス</th>
+				</tr>
+				<% @orders.each do |order| %>
+				<tr>
+					<td><%= link_to order.created_at, admin_ordered_product_path(order) %></td>
+					<td><%= order.customer.full_name %></td>
+					<td><%= order.ordered_products.count %></td>
+					<td><%= order.order_status %></td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
