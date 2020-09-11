@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6">
+			<%= attachment_image_tag @product, :image, size: "300x300", fallback: "no_image.jpg" %>
+		</div>
+		<div class="col-xs-6">
+			<table class="table">
+				<tr>
+					<td><h3><%= @product.name %></h3></td>
+				</tr>
+				<tr>
+					<td><%= @product.description %></td>
+				</tr>
+				<tr>
+					<td>￥<%= @product.price * 1.1 %>（税込）</td>
+				</tr>
+				<tr>
+					<td>
+						<%= form_with model:@cart_item, url: "/cart_items", method: :post, lolal: true do |f|  %>
+						<%= f.hidden_field :product_id, value: @product.id %>
+						<%= f.select :count, [["１個", 1], ["２個", 2], ["３個", 3], ["４個", 4], ["５個", 5]], include_blank: "個数選択" %>
+						<%= f.submit "カートに入れる", class: "btn btn-primary" %>
+						<% end %>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

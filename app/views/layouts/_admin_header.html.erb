@@ -14,11 +14,12 @@
 		
 		<div class="collapse navbar-collapse" id="navbarEexample3">
 			<ul class="nav navbar-nav">
-				<li><a href="#">商品一覧</a></li>
+				<li><%= link_to "商品一覧", admin_products_path %></li>
 				<li class="active"><a href="#">会員一覧</a></li>
-				<li><a href="#">注文履歴一覧</a></li>
-				<li><a href="#">ジャンル一覧</a></li>
-				<li><a href="#">ログアウト</a></li>
+				<li><%= link_to "会員一覧", admin_customers_path %></li>
+				<li><%= link_to "注文履歴一覧", admin_orders_path %></li>
+				<li><%= link_to "ジャンル一覧", admin_genres_path %></li>
+				<li><%= link_to "ログアウト", destroy_admin_session_path %></li>
 			</ul>
 			<form class="navbar-form navbar-left" role="search">
 				<div class="form-group">
