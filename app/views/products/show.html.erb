@@ -16,8 +16,9 @@
 				</tr>
 				<tr>
 					<td>
-						<%= form_with model:@cart_item, url: "/cart_items", method: :post, lolal: true do |f|  %>
+						<%= form_with model: @cart_item, url: "/cart_items", method: :post, lolal: true do |f|  %>
 						<%= f.hidden_field :product_id, value: @product.id %>
+						<%= f.hidden_field :customer_id, value: current_customer.id %>
 						<%= f.select :count, [["１個", 1], ["２個", 2], ["３個", 3], ["４個", 4], ["５個", 5]], include_blank: "個数選択" %>
 						<%= f.submit "カートに入れる", class: "btn btn-primary" %>
 						<% end %>

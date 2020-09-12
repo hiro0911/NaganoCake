@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>ショッピングカート</h3>
+			<%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete %>
+			<table class="table">
+				<tr>
+					<th>商品名</th>
+					<th>単価（税込）</th>
+					<th>数量</th>
+					<th>小計</th>
+					<th></th>
+				</tr>
+				<%= @cart_items.each %>
+				<tr>
+					<td><%= attachment_image_tag @product, :image, size: "50x50", fallback: "no_image.jpg" %><%= @cart_item.product.name %></td>
+				  </td>
+				  <td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
