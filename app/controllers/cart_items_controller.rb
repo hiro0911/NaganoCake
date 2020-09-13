@@ -7,6 +7,9 @@ class CartItemsController < ApplicationController
 			render "products/show"
 		end
 	end
+	def index
+		@cart_items = CartItem.all
+	end
 	private
 	def cart_item_params
 		params.require(:cart_item).permit(:customer_id, :product_id, :count)
