@@ -6,7 +6,4 @@ module ApplicationHelper
 		end
 		return price
 	end
-	def all_address
-		delivery.postcode + delivery.address + delivery.name
-	end
 end
