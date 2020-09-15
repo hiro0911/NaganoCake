@@ -2,12 +2,12 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h3>注文情報</h3>
-			<%= form_with model: @order, url: "/orders", method: :post, local: true do |f| %>
+			<%= form_with model: @order, url: "/orders/confirm", method: :post, local: true do |f| %>
 			<h3>支払い方法</h3>
-			<%= f.radio_button :payment, "クレジットカード" %>クレジットカード<br>
+			<%= f.radio_button :payment, "クレジットカード", checked: true %>クレジットカード<br>
 			<%= f.radio_button :payment, "銀行振込" %>銀行振込	
 			<h3>お届け先</h3>
-			<%= f.radio_button :addresses, "ご自身の住所" %>ご自身の住所<br>
+			<%= f.radio_button :addresses, "ご自身の住所", checked: true %>ご自身の住所<br>
 			<%= @delivery.postcode + @delivery.address + @delivery.name %><br>
 			<%= f.radio_button :addresses, "登録住所から選択" %>登録住所から選択<br>
 			<%= f.collection_select :delivery_id, @deliveries, :id, :order_address %><br>

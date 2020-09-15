@@ -12,4 +12,10 @@ class Customer < ApplicationRecord
 	def full_name
   	self.family_name_kanji + self.first_name_kanji
   end
+  def full_name_kana
+    self.family_name_kana + self.first_name_kana
+  end
+  def active_for_authentication?
+    super && (self.admission_status === "有効会員")
+  end
 end

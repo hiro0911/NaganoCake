@@ -15,8 +15,8 @@
 				<tr>
 					<td><%= attachment_image_tag cart_item.product, :image, size: "50x50", fallback: "no_image.jpg" %><%= cart_item.product.name %></td>
 				  <td><%= cart_item.product.price %></td>
-				  <%= form_with mdoel: cart_item, url: "/cart_items/#{cart_item.id}", method: :patch, local: true do |f| %>
-				  <td><%= f.text_field :count, value: cart_item.count %><%= f.submit "変更", class: "btn btn-primary" %></td>
+				  <%= form_for cart_item do |f| %>
+				  <td><%= f.number_field :count, value: cart_item.count %><%= f.submit "変更", class: "btn btn-primary" %></td>
 				  <% end %>
 				  <td><%= cart_item.product.price * cart_item.count %></td>
 				  <td><%= link_to "削除する", "/cart_items/#{cart_item.id}", class: "btn btn-danger" %></td>
