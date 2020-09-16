@@ -18,4 +18,7 @@ class Customer < ApplicationRecord
   def active_for_authentication?
     super && (self.admission_status === "有効会員")
   end
+  def full_address
+    self.postcode + self.address + self.full_name
+  end
 end

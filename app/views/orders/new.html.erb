@@ -8,7 +8,7 @@
 			<%= f.radio_button :payment, "銀行振込" %>銀行振込	
 			<h3>お届け先</h3>
 			<%= f.radio_button :addresses, "ご自身の住所", checked: true %>ご自身の住所<br>
-			<%= @delivery.postcode + @delivery.address + @delivery.name %><br>
+			<%= current_customer.full_address %><br>
 			<%= f.radio_button :addresses, "登録住所から選択" %>登録住所から選択<br>
 			<%= f.collection_select :delivery_id, @deliveries, :id, :order_address %><br>
 			<%= f.radio_button :addresses, "新しいお届け先" %>新しいお届け先<br>

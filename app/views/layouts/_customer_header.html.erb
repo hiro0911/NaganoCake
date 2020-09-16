@@ -14,9 +14,9 @@
 		
 		<div class="collapse navbar-collapse" id="navbarEexample3">
 			<ul class="nav navbar-nav">
-				<li><a href="#">マイページ</a></li>
-				<li class="active"><a href="#">商品一覧</a></li>
-				<li><a href="#">カート</a></li>
+				<li><%= link_to "マイページ", customer_path(current_customer) %></li>
+				<li><%= link_to "商品一覧", products_path %></li>
+				<li><%= link_to "カート", cart_items_path %></li>
 				<li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>	
 			</ul>
 			<form class="navbar-form navbar-left" role="search">

@@ -1,1 +1,24 @@
-show
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6">
+			<table class="table">
+				<h3>注文情報</h3>
+				<tr>
+					<th>注文日</th>
+					<td>@order.created_at</td>
+				</tr>	
+				<tr>
+					<th>配送先</th>
+					<td>@order.full_address</td>
+				</tr>
+				<tr>
+					<th>支払い方法</th>
+					<td>@order.payment</td>
+				</tr>
+				<tr>
+					<th>ステータス</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

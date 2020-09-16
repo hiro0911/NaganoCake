@@ -29,6 +29,7 @@ class OrdersController < ApplicationController
 	def create
 		@cart_items = CartItem.where(customer_id: current_customer.id)
 		@order = Order.new(order_params)
+		@order.order_status = 1
 		if @order.save!
 			if params[:addresses] == "新しいお届け先"
 				Delivery.create!(customer_id: current_customer.id,
@@ -40,14 +41,22 @@ class OrdersController < ApplicationController
 				OrderedProduct.create!(order_id: @order.id,
 															 product_id: cart_item.product.id,
 															 count: cart_item.count,
-															 price: cart_item.product.price * cart_item.count * 1.1 )
+															 price: cart_item.product.price * cart_item.count * 1.1,
+															 production_status: 1)
 			end
+			CartItem.where(customer_id: current_customer.id).destroy_all
 			redirect_to orders_thanks_path
 		else
 			render "new"
 		end
 	end
 	def thanks
+	end
+	def index
+		@orders = Order.where(customer_id: current_customer.id)
+	end
+	def show
+		@order = Order.find(params[:id])
 	end
 	private
 	def order_params
