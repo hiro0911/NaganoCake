@@ -9,13 +9,24 @@
 					<th>注文個数</th>
 					<th>注文ステータス</th>
 				</tr>
-				<% @orders.each do |order| %>
+				<% if params[:customer_id] %>
+				<% Order.where(customer_id: params[:customer_id]).each do |order| %>
 				<tr>
-					<td><%= link_to order.created_at, admin_ordered_product_path(order) %></td>
+					<td><%= link_to order.created_at, admin_order_path(order) %></td>
 					<td><%= order.customer.full_name %></td>
 					<td><%= order.ordered_products.count %></td>
 					<td><%= order.order_status %></td>
 				</tr>
+				<% end %>
+				<% else %>
+				<% @orders.each do |order| %>
+				<tr>
+					<td><%= link_to order.created_at, admin_order_path(order) %></td>
+					<td><%= order.customer.full_name %></td>
+					<td><%= order.ordered_products.count %></td>
+					<td><%= order.order_status %></td>
+				</tr>
+				<% end %>
 				<% end %>
 			</table>
 		</div>

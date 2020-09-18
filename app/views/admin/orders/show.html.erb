@@ -17,7 +17,7 @@
 				</tr>
 				<tr>
 					<th>注文ステータス</th>
-					<%= form_with model:@order url: "/admin/orders/#{@order.id}", method: :patch, local: true do |f| %>
+					<%= form_with model:@order, url: "/admin/orders/#{@order.id}", method: :patch, local: true do |f| %>
 					<td><%= f.select :order_status,[["入金待ち", "入金待ち"], ["入金確認", "入金確認"], ["製作中", "製作中"], ["発送準備中", "発送準備中"], ["発送済み", "発送済み"]] %></td>
 					<td><%= f.submit "更新", class: "btn btn-primary" %></td>
 					<% end %>
@@ -34,7 +34,7 @@
 					<th>製作ステータス</th>
 					<th></th>
 				</tr>
-				<%= @ordered_products.each do |ordered_product| %>
+				<% @ordered_products.each do |ordered_product| %>
 				<tr>
 					<td><%= ordered_product.product.name %></td>
 					<td><%= ordered_product.product.price %></td>

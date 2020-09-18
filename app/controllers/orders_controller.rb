@@ -21,9 +21,14 @@ class OrdersController < ApplicationController
 			@order.name = @delivery.name
 		end
 		if params[:addresses] == "新しいお届け先"
-			@order.postcode = params[:order][:postcode]
-			@order.address = params[:order][:address]
-			@order.name = params[:order][:name]
+			@order.postcode = params[:postcode]
+			@order.address = params[:address]
+			@order.name = params[:name]
+			Delivery.create!(customer_id: current_customer.id,
+											 name: @order.name,
+											 postcode: @order.postcode,
+											 address: @order.address)
+			
 		end	
 	end
 	def create
@@ -31,12 +36,7 @@ class OrdersController < ApplicationController
 		@order = Order.new(order_params)
 		@order.order_status = 1
 		if @order.save!
-			if params[:addresses] == "新しいお届け先"
-				Delivery.create!(customer_id: current_customer.id,
-												 name: @order.name,
-												 postcode: @order.postcode,
-												 address: @order.address)
-			end
+			
 			@cart_items.each do |cart_item|
 				OrderedProduct.create!(order_id: @order.id,
 															 product_id: cart_item.product.id,
@@ -57,9 +57,10 @@ class OrdersController < ApplicationController
 	end
 	def show
 		@order = Order.find(params[:id])
+		@ordered_products = OrderedProduct.where(order_id: params[:id])
 	end
 	private
 	def order_params
-		params.require(:order).permit(:customer_id, :name, :postcode, :address, :postage, :billing_amount, :payment, :order_status)
+		params.require(:order).permit(:customer_id, :name, :postcode, :address, :postage, :billing_amount, :payment, :order_status,)
 	end
 end

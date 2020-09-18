@@ -7,9 +7,11 @@ Rails.application.routes.draw do
 	    root "orders#top"  #管理者topページ
 	    resources :products, :except => :destroy
 	    resources :genres, :only => [:edit, :update, :create, :index]
-	    resources :customers, :only => [:edit, :update, :show, :index]
+	    resources :customers, :only => [:edit, :update, :show, :index] do
+        resources :orders, only: [:index]
+      end
 	    resources :ordered_products
-	    resources :orders, :only => [:update, :show, :index]
+	    resources :orders, :only => [:update, :show, :index] 
 	end
 
 #customer
