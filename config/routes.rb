@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   
   resources :customers, :only => [:show, :edit, :update]
   resources :products, :only => [:show, :index]
+  get "/genre/products/:genre_id", to: "products#index"
   resources :cart_items, :only => [:create, :update, :destroy, :index]
   resources :orders, :only => [:show, :index, :new, :create]
   resources :deliveries, :except => [:show, :new]
